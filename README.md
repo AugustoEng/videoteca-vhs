@@ -11,15 +11,15 @@ Sistema de empréstimo de fitas VHS com banco de dados MySQL: modelagem conceitu
 | Disciplina      | Laboratório de Banco de Dados    |
 | Professor       | Jefferson Salomão Rodrigues      |
 | Turma/Semestre  | 4° Semestre                      |
-| Data de entrega | 15 - 11 - 2026                   |
+| Data de entrega | 15/11/2026                       |
 
 ## Integrantes
 
-| Camilla Silva Mesquita de Miranda | [preencher]  
-| Christopher Almeida do nascimento | [preencher] 
-| Davi Gabriel Ramos Pereira        | [preencher] 
-| Erick Teixeira dos Santos         | [preencher]  
-| Guilherme Augusto dos Santos      | UC25100900
+| Camilla Silva Mesquita de Miranda | [preencher] | 
+| Christopher Almeida do nascimento | [preencher] | 
+| Davi Gabriel Ramos Pereira        | [preencher] | 
+| Erick Teixeira dos Santos         | [preencher] |  
+| Guilherme Augusto dos Santos      | UC25100900  |
 
 ## Sobre o projeto
 
