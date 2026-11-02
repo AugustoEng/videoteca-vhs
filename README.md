@@ -15,10 +15,12 @@ Sistema de empréstimo de fitas VHS com banco de dados MySQL: modelagem conceitu
 
 ## Integrantes
 
-| Camilla Silva Mesquita de Miranda | [preencher] | 
-| Christopher Almeida do nascimento | [preencher] | 
-| Davi Gabriel Ramos Pereira        | [preencher] | 
-| Erick Teixeira dos Santos         | [preencher] |  
+| Nome                              | Matrícula   |
+|-----------------------------------|-------------|
+| Camilla Silva Mesquita de Miranda | [preencher] |
+| Christopher Almeida do Nascimento | [preencher] |
+| Davi Gabriel Ramos Pereira        | [preencher] |
+| Erick Teixeira dos Santos         | [preencher] |
 | Guilherme Augusto dos Santos      | UC25100900  |
 
 ## Sobre o projeto
