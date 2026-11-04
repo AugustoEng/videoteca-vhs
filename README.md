@@ -53,7 +53,7 @@ O sistema controla o acervo e os empréstimos de uma videoteca. Cada usuário pe
 .
 ├── README.md
 ├── .gitignore
-├── db/      scripts SQL do banco, executados em ordem numérica
+├── bd/      scripts SQL do banco, executados em ordem numérica
 ├── app/     código da aplicação
 └── docs/    regras de negócio, modelos e artigo
 ```
@@ -67,27 +67,27 @@ A modelagem seguiu a ordem conceitual, lógico e físico, registrada no históri
 | Regras de negócio | `docs/regras_de_negocio.xlsx`             |
 | Modelo conceitual | `docs/modelos.drawio` (página Conceitual) |
 | Modelo lógico     | `docs/modelos.drawio` (página Lógico)     |
-| Modelo físico     | `db/01_ddl.sql`                           |
+| Modelo físico     | `bd/01_ddl.sql`                           |
 
 ## Recursos do banco de dados
 
 | Recurso                | Script                 |
 |------------------------|------------------------|
-| Usuário administrador  | `db/00_admin.sql`      |
-| Tabelas e restrições   | `db/01_ddl.sql`        |
-| Functions              | `db/02_functions.sql`  |
-| Triggers               | `db/03_triggers.sql`   |
-| Procedures e TCL       | `db/04_procedures.sql` |
-| Views                  | `db/05_views.sql`      |
-| Índices                | `db/06_indices.sql`    |
-| Controle de acesso     | `db/07_acesso.sql`     |
-| Dados de teste         | `db/08_dados_teste.sql`|
+| Usuário administrador  | `bd/00_admin.sql`      |
+| Tabelas e restrições   | `bd/01_ddl.sql`        |
+| Functions              | `bd/02_functions.sql`  |
+| Triggers               | `bd/03_triggers.sql`   |
+| Procedures e TCL       | `bd/04_procedures.sql` |
+| Views                  | `bd/05_views.sql`      |
+| Índices                | `bd/06_indices.sql`    |
+| Controle de acesso     | `bd/07_acesso.sql`     |
+| Dados de teste         | `bd/08_dados_teste.sql`|
 
 ## Como executar
 
 ### Banco de dados
 
-Siga as instruções em [`db/README.md`](db/README.md).
+Siga as instruções em ["bd/README.md`](bd/README.md).
 
 ## Documentação
 
