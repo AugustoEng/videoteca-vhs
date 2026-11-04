@@ -6,7 +6,7 @@ Sistema de empréstimo de fitas VHS com banco de dados MySQL: modelagem conceitu
 
 | Campo           | Informação                       |
 |-----------------|----------------------------------|
-| Instituição     | Universidade Ctólica de Brasília |
+| Instituição     | Universidade Católica de Brasília |
 | Curso           | Engenharia de Software           |
 | Disciplina      | Laboratório de Banco de Dados    |
 | Professor       | Jefferson Salomão Rodrigues      |
@@ -87,7 +87,7 @@ A modelagem seguiu a ordem conceitual, lógico e físico, registrada no históri
 
 ### Banco de dados
 
-Siga as instruções em ["bd/README.md`](bd/README.md).
+Siga as instruções em ['bd/README.md`](bd/README.md).
 
 ## Documentação
 
