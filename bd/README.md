@@ -13,7 +13,7 @@ Os scripts devem ser executados na ordem numérica, cada um com o usuário indic
 | Ordem | Script               | Usuário         | O que faz                                                                  |
 |-------|----------------------|-----------------|----------------------------------------------------------------------------|
 | 1     | `00_admin.sql`       | root            | Cria o usuário `admin_videoteca` e concede suas permissões                 |
-| 2     | `01_ddl.sql`         | admin_videoteca | Apaga e recria o banco `videoteca` com as 5 tabelas e restrições           |
+| 2     | `01_ddl.sql`         | admin_videoteca | Apaga e recria o banco `videoteca` com as 6 tabelas (5 de negócio e `sequencias`, contador de códigos) e restrições (inclui `ck_filmes_ano`)           |
 | 3     | `02_functions.sql`   | admin_videoteca | Cria as functions de geração de IDs e de cálculo de multa                  |
 | 4     | `03_triggers.sql`    | admin_videoteca | Cria os triggers de geração de IDs, prazo de devolução e controle de estoque |
 | 5     | `04_procedures.sql`  | admin_videoteca | Cria as procedures de empréstimo e devolução, com controle de transação    |
@@ -36,16 +36,18 @@ Os scripts devem ser executados na ordem numérica, cada um com o usuário indic
 Execute a partir desta pasta:
 
 ```
-mysql -u root -p < 00_admin.sql
-mysql -u admin_videoteca -p < 01_ddl.sql
-mysql -u admin_videoteca -p < 02_functions.sql
-mysql -u admin_videoteca -p < 03_triggers.sql
-mysql -u admin_videoteca -p < 04_procedures.sql
-mysql -u admin_videoteca -p < 05_views.sql
-mysql -u admin_videoteca -p < 06_indices.sql
-mysql -u admin_videoteca -p < 07_acesso.sql
-mysql -u admin_videoteca -p < 08_dados_teste.sql
+mysql --default-character-set=utf8mb4 -u root -p < 00_admin.sql
+mysql --default-character-set=utf8mb4 -u admin_videoteca -p < 01_ddl.sql
+mysql --default-character-set=utf8mb4 -u admin_videoteca -p < 02_functions.sql
+mysql --default-character-set=utf8mb4 -u admin_videoteca -p < 03_triggers.sql
+mysql --default-character-set=utf8mb4 -u admin_videoteca -p < 04_procedures.sql
+mysql --default-character-set=utf8mb4 -u admin_videoteca -p < 05_views.sql
+mysql --default-character-set=utf8mb4 -u admin_videoteca -p < 06_indices.sql
+mysql --default-character-set=utf8mb4 -u admin_videoteca -p < 07_acesso.sql
+mysql --default-character-set=utf8mb4 -u admin_videoteca -p < 08_dados_teste.sql
 ```
+
+O parâmetro `--default-character-set=utf8mb4` garante que os acentos sejam gravados corretamente. Sem ele, um terminal com outra codificação grava os acentos errados, e as mensagens das procedures deixam de ser reconhecidas pela aplicação. Pelo MySQL Workbench esse cuidado não é necessário.
 
 ## Recriar o banco do zero
 

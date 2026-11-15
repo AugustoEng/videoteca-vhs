@@ -181,3 +181,22 @@ test('integração HTTP: login, catálogo view e usuários entidade', async () =
     assert.equal(resposta.status, 400);
   } finally { await new Promise(resolve => api.close(resolve)); }
 });
+
+test('traduzirErroBanco: 1062 só vira "e-mail cadastrado" no índice do e-mail', () => {
+  const { traduzirErroBanco } = require('../src/erros');
+  const email = traduzirErroBanco({ errno: 1062, sqlMessage: "Duplicate entry 'a@b.c' for key 'usuarios.uq_usuarios_email'" });
+  assert.equal(email.status, 409);
+  assert.match(email.message, /e-mail/);
+  const outra = traduzirErroBanco({ errno: 1062, sqlMessage: "Duplicate entry 'USR-00009' for key 'usuarios.PRIMARY'" });
+  assert.equal(outra.status, 409);
+  assert.doesNotMatch(outra.message, /e-mail/);
+  assert.match(traduzirErroBanco({ errno: 1213 }).message, /Tente novamente/);
+  assert.match(traduzirErroBanco({ errno: 1205 }).message, /Tente novamente/);
+});
+
+test('retirada devolve o código do empréstimo', async () => {
+  const { servico, ator } = setup();
+  const admin = await ator('USR-00001');
+  const r = await servico.emprestar(admin, { idUsuario: 'USR-00005', idFilme: 4 });
+  assert.match(r.idEmprestimo, /^EMP-\d{4}-\d{5}$/);
+});

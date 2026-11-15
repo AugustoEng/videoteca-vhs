@@ -88,8 +88,9 @@ async function criarRepositorio() {
     const params = [];
 
     if (busca) {
+      // Escapa \\, % e _ para que a busca seja pelo início literal do título.
       where += " AND titulo LIKE CONCAT(?, '%')";
-      params.push(busca);
+      params.push(busca.replace(/[\\%_]/g, '\\$&'));
     }
     if (genero) {
       where += ' AND genero = ?';
@@ -136,8 +137,10 @@ async function criarRepositorio() {
   }
 
   async function registrarEmprestimo({ idUsuario, idFilme }) {
-    // A procedure valida estoque, limite de 3 fitas e transação.
-    await pool.execute('CALL sp_emprestar(?, ?)', [idUsuario, idFilme]);
+    // A procedure valida estoque, limite de 3 fitas e transação, e devolve o código EMP.
+    const [resultado] = await pool.execute('CALL sp_emprestar(?, ?)', [idUsuario, idFilme]);
+    const linha = Array.isArray(resultado) ? resultado[0] : null;
+    return { idEmprestimo: linha?.id_emprestimo ?? null };
   }
 
   async function registrarDevolucao({ idEmprestimo }) {

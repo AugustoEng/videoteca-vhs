@@ -11,8 +11,12 @@ async function iniciar() {
     repositorio = repositorio();
     console.warn('Modo DEMO: dados em memória, sem conexão MySQL. Não usar em produção.');
   } else {
-    if ((process.env.DB_USER || '').toLowerCase() === 'root') {
+    const usuarioBanco = (process.env.DB_USER || '').toLowerCase();
+    if (usuarioBanco === 'root') {
       throw new Error('A aplicação não pode conectar-se ao MySQL como root.');
+    }
+    if (usuarioBanco === 'admin_videoteca') {
+      throw new Error('A aplicação não pode conectar-se ao MySQL como admin_videoteca; use app_videoteca.');
     }
     const caminho = process.env.REPOSITORIO_MODULE || './repositorios/mysql-repository';
     let modulo;

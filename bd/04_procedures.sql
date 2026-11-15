@@ -10,6 +10,7 @@ BEGIN
   DECLARE v_ativo BOOLEAN;
   DECLARE v_disponivel INT;
   DECLARE v_abertos INT;
+  DECLARE v_id_emprestimo CHAR(14);
 
   DECLARE EXIT HANDLER FOR SQLEXCEPTION
   BEGIN
@@ -22,7 +23,8 @@ BEGIN
   SELECT ativo
     INTO v_ativo
     FROM usuarios
-   WHERE id_usuario = p_id_usuario;
+   WHERE id_usuario = p_id_usuario
+     FOR UPDATE;
 
   IF v_ativo IS NULL THEN
     SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Usuário não encontrado';
@@ -59,7 +61,17 @@ BEGIN
     SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Limite de 3 fitas em aberto atingido';
   END IF;
 
+  SELECT id_emprestimo
+    INTO v_id_emprestimo
+    FROM emprestimos
+   WHERE id_usuario = p_id_usuario
+     AND data_devolucao IS NULL
+   ORDER BY id_emprestimo DESC
+   LIMIT 1;
+
   COMMIT;
+
+  SELECT v_id_emprestimo AS id_emprestimo;
 END$$
 
 CREATE PROCEDURE sp_devolver(IN p_id_emprestimo CHAR(14))

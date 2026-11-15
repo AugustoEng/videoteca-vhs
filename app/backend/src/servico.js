@@ -148,8 +148,8 @@ function criarServico(repositorio, { segredo, agora = Date.now } = {}) {
       throw new ErroAplicacao(409, 'REGRA_NEGOCIO', 'A retirada de fitas é exclusiva para sócios.');
     }
     // A procedure sp_emprestar é a autoridade final sobre estoque, limite e transação.
-    await operacaoBanco(() => repositorio.registrarEmprestimo({ idUsuario, idFilme }));
-    return { mensagem: 'Empréstimo registrado com sucesso.' };
+    const resultado = await operacaoBanco(() => repositorio.registrarEmprestimo({ idUsuario, idFilme }));
+    return { mensagem: 'Empréstimo registrado com sucesso.', idEmprestimo: resultado?.idEmprestimo ?? null };
   }
 
   async function devolver(ator, id) {

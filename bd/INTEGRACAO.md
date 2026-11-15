@@ -145,7 +145,7 @@ CALL sp_emprestar('USR-00010', 25);
 | `p_id_usuario` | CHAR(9) | Código do sócio          |
 | `p_id_filme`   | INT     | Identificador do filme   |
 
-Em caso de sucesso, o empréstimo é gravado com o código e o prazo gerados pelo banco, e o estoque do filme diminui em 1. A procedure não devolve dados: para mostrar o empréstimo criado, consulte a `vw_emprestimos_ativos`.
+Em caso de sucesso, o empréstimo é gravado com o código e o prazo gerados pelo banco, e o estoque do filme diminui em 1. A procedure devolve uma linha com a coluna `id_emprestimo` (código EMP gerado). Os códigos USR e EMP vêm da tabela `sequencias`, travada até o fim da transação, e a retirada trava a linha do sócio para que o limite de 3 fitas valha mesmo com pedidos simultâneos.
 
 | Mensagem                                  | Quando acontece                          |
 |-------------------------------------------|------------------------------------------|

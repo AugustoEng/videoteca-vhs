@@ -53,8 +53,9 @@ function criarRepositorioDemo() {
     async listarGrupos() { return grupos.slice(); },
     async criarUsuario({ nome, email, senhaHash, idGrupo }) {
       if (usuarios.some(u => u.email === email)) {
-        const erro = new Error('Duplicate entry');
+        const erro = new Error("Duplicate entry '" + email + "' for key 'usuarios.uq_usuarios_email'");
         erro.errno = 1062;
+        erro.sqlMessage = erro.message;
         throw erro;
       }
       const id_usuario = `USR-${String(++sequenciaUsuario).padStart(5, '0')}`;
@@ -97,12 +98,14 @@ function criarRepositorioDemo() {
         recusa('Limite de 3 fitas em aberto atingido');
       }
       const agora = hoje();
+      const idEmprestimo = `EMP-${agora.slice(0, 4)}-${String(++sequenciaEmprestimo).padStart(5, '0')}`;
       registros.push({
-        id_emprestimo: `EMP-${agora.slice(0, 4)}-${String(++sequenciaEmprestimo).padStart(5, '0')}`,
+        id_emprestimo: idEmprestimo,
         id_usuario: idUsuario, id_filme: idFilme, data_retirada: agora,
         data_prevista: adicionarDias(agora, 3), data_devolucao: null
       });
       filme.qtd_disponivel -= 1;
+      return { idEmprestimo };
     },
     async registrarDevolucao({ idEmprestimo }) {
       const registro = registros.find(e => e.id_emprestimo === idEmprestimo);

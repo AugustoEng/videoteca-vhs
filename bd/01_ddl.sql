@@ -41,7 +41,8 @@ CREATE TABLE filmes (
   CONSTRAINT uq_filmes_codigo_catalogo UNIQUE (codigo_catalogo),
   CONSTRAINT fk_filmes_genero FOREIGN KEY (id_genero)
     REFERENCES generos (id_genero) ON DELETE RESTRICT ON UPDATE RESTRICT,
-  CONSTRAINT ck_filmes_estoque CHECK (qtd_disponivel BETWEEN 0 AND qtd_total)
+  CONSTRAINT ck_filmes_estoque CHECK (qtd_disponivel BETWEEN 0 AND qtd_total),
+  CONSTRAINT ck_filmes_ano CHECK (ano_lancamento BETWEEN 1888 AND 2100)
 ) ENGINE=InnoDB;
 
 CREATE TABLE emprestimos (
@@ -61,3 +62,11 @@ CREATE TABLE emprestimos (
   CONSTRAINT ck_emprestimos_devolucao CHECK (data_devolucao IS NULL OR data_devolucao >= data_retirada),
   CONSTRAINT ck_emprestimos_multa CHECK (valor_multa IS NULL OR valor_multa >= 0)
 ) ENGINE=InnoDB;
+
+CREATE TABLE sequencias (
+  chave  VARCHAR(20) NOT NULL,
+  ultimo INT         NOT NULL,
+  PRIMARY KEY (chave)
+) ENGINE=InnoDB;
+
+INSERT INTO sequencias (chave, ultimo) VALUES ('USR', 0);

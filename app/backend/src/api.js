@@ -14,6 +14,10 @@ function enviar(res, status, dados) {
 }
 
 async function corpoJson(req) {
+  const tipo = String(req.headers['content-type'] || '').split(';')[0].trim().toLowerCase();
+  if (tipo !== 'application/json') {
+    throw new ErroAplicacao(415, 'TIPO_NAO_SUPORTADO', 'Envie o corpo com Content-Type: application/json.');
+  }
   let corpo = '';
   for await (const trecho of req) {
     corpo += trecho;

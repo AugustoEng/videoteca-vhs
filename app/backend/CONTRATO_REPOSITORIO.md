@@ -38,7 +38,7 @@ Não há arquivo desse tipo no repositório original: **esse arquivo deverá ser
 | `alterarStatusUsuario(idUsuario,ativo)` | string, bool | `void` | `UPDATE usuarios SET ativo = ? WHERE id_usuario = ?` |
 | `listarCatalogo({busca,genero,somenteDisponiveis,limite,offset})` | objeto | `{itens: [], total: number}` | Usar `vw_catalogo` com filtro/paginação e `COUNT(*)` |
 | `listarEmprestimosAtivos({idUsuario})` | objeto | array de empréstimos ativos | `SELECT * FROM vw_emprestimos_ativos` com filtro por usuário opcional |
-| `registrarEmprestimo({idUsuario,idFilme})` | objeto | `void` | `CALL sp_emprestar(?, ?)` |
+| `registrarEmprestimo({idUsuario,idFilme})` | objeto | `{ idEmprestimo }` (código EMP devolvido pela procedure) | `CALL sp_emprestar(?, ?)` |
 | `registrarDevolucao({idEmprestimo})` | objeto | `void` | `CALL sp_devolver(?)` |
 
 ### Consulta do catálogo

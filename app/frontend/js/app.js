@@ -176,7 +176,7 @@ document.addEventListener("submit", async (e) => {
     if (k === "ret") {
       try {
         const r = await API.emprestar($("#su").value.trim().toUpperCase(), Number($("#sf").value));
-        await go("retirada"); $("#res").innerHTML = msg(true, r.mensagem);
+        await go("retirada"); $("#res").innerHTML = msg(true, r.idEmprestimo ? `${r.mensagem} Código: ${r.idEmprestimo}.` : r.mensagem);
       } catch (er) { $("#res").innerHTML = msg(false, er.status === 409 ? `${er.message}. Nada foi gravado.` : er.message); }
     }
     if (k === "nu") {
@@ -190,6 +190,14 @@ document.addEventListener("submit", async (e) => {
 
 /* ---------- Início: reaproveita a sessão se o token ainda valer ---------- */
 (async () => {
-  if (Sessao.token) { try { S.me = await API.me(); go("catalogo"); return; } catch (_) { Sessao.limpar(); } }
+  if (Sessao.token) {
+    try { S.me = await API.me(); go("catalogo"); return; }
+    catch (er) {
+      Sessao.limpar();
+      // Token vencido ou inválido: avisa; falha de rede mostra a própria mensagem.
+      login(er.status === 401 ? "Sua sessão expirou. Entre novamente." : er.message);
+      return;
+    }
+  }
   login();
 })();

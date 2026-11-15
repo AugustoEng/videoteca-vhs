@@ -4,24 +4,22 @@ Sistema de empréstimo de fitas VHS com banco de dados MySQL: modelagem conceitu
 
 ## Informações acadêmicas
 
-| Campo           | Informação                       |
-|-----------------|----------------------------------|
+| Campo           | Informação                        |
+|-----------------|-----------------------------------|
 | Instituição     | Universidade Católica de Brasília |
-| Curso           | Engenharia de Software           |
-| Disciplina      | Laboratório de Banco de Dados    |
-| Professor       | Jefferson Salomão Rodrigues      |
-| Turma/Semestre  | 4° Semestre                      |
-| Data de entrega | 15/11/2026                       |
+| Curso           | Engenharia de Software            |
+| Disciplina      | Laboratório de Banco de Dados     |
+| Professor       | Jefferson Salomão Rodrigues       |
+| Turma/Semestre  | 4° Semestre                       |
+| Data de entrega | 15/11/2026                        |
 
 ## Integrantes
 
-| Nome                              | Matrícula   |
-|-----------------------------------|-------------|
-| Camilla Silva Mesquita de Miranda | [preencher] |
-| Christopher Almeida do Nascimento | [preencher] |
-| Davi Gabriel Ramos Pereira        | [preencher] |
-| Erick Teixeira dos Santos         | [preencher] |
-| Guilherme Augusto dos Santos      | UC25100900  |
+- Camilla Silva Mesquita de Miranda
+- Christopher Almeida do Nascimento
+- Davi Gabriel Ramos Pereira
+- Erick Teixeira dos Santos
+- Guilherme Augusto dos Santos
 
 ## Sobre o projeto
 
@@ -29,23 +27,25 @@ O sistema controla o acervo e os empréstimos de uma videoteca. Cada usuário pe
 
 ### Funcionalidades
 
-- Cadastro de usuários e grupos de usuários
-- Catálogo de filmes por gênero, com quantidade de fitas disponíveis
-- Empréstimo e devolução de fitas, com atualização automática do estoque
+- Login por e-mail e senha, com telas diferentes para administrador, atendente e sócio
+- Catálogo de filmes com busca por título, filtro por gênero e quantidade de fitas disponíveis
+- Cadastro, ativação e desativação de usuários
+- Retirada e devolução de fitas, com atualização automática do estoque
 - Limite de 3 fitas em aberto por sócio e prazo de devolução de 3 dias
-- Cálculo de multa por dia de atraso
+- Cálculo de multa por dia de atraso, exibida antes da devolução
 - Acesso ao banco por usuários com permissões específicas, sem uso do root
 
 ## Tecnologias
 
-| Camada                 | Tecnologia            |
-|------------------------|-----------------------|
-| Banco de dados         | MySQL 8.4 LTS         |
-| Administração do banco | MySQL Workbench       |
-| Modelagem              | draw.io               |
-| Backend                | [preencher]           |
-| Frontend               | [preencher]           |
-| Versionamento          | Git e GitHub          |
+| Camada                 | Tecnologia                                            |
+|------------------------|-------------------------------------------------------|
+| Banco de dados         | MySQL 8.4 LTS                                         |
+| Administração do banco | MySQL Workbench                                       |
+| Modelagem              | draw.io                                               |
+| Backend                | Node.js 20 (módulo `http` nativo) com o driver `mysql2` |
+| Frontend               | HTML, CSS e JavaScript, sem frameworks                |
+| Testes                 | `node:test`                                           |
+| Versionamento          | Git e GitHub                                          |
 
 ## Estrutura do repositório
 
@@ -53,43 +53,80 @@ O sistema controla o acervo e os empréstimos de uma videoteca. Cada usuário pe
 .
 ├── README.md
 ├── .gitignore
-├── bd/      scripts SQL do banco, executados em ordem numérica
-├── app/     código da aplicação
-└── docs/    regras de negócio, modelos e artigo
+├── bd/              scripts SQL do banco, executados em ordem numérica
+├── app/
+│   ├── backend/     API em Node.js que se comunica com o MySQL
+│   └── frontend/    interface web em HTML, CSS e JavaScript
+└── docs/            regras de negócio, modelos e dicionário de dados
 ```
 
 ## Modelagem
 
-A modelagem seguiu a ordem conceitual, lógico e físico, registrada no histórico de commits e nas tags de cada etapa.
+A modelagem seguiu a ordem: regras de negócio, modelo conceitual, modelo lógico e modelo físico.
 
-| Etapa             | Arquivo                                   |
-|-------------------|-------------------------------------------|
-| Regras de negócio | `docs/regras_de_negocio.xlsx`             |
-| Modelo conceitual | `docs/modelos.drawio` (página Conceitual) |
-| Modelo lógico     | `docs/modelos.drawio` (página Lógico)     |
-| Modelo físico     | `bd/01_ddl.sql`                           |
+| Etapa               | Arquivo                                   |
+|---------------------|-------------------------------------------|
+| Regras de negócio   | `docs/regras_de_negocio.xlsx`             |
+| Modelo conceitual   | `docs/modelos.drawio` (página Conceitual) |
+| Relacionamentos     | `docs/relacionamentos.xlsx`               |
+| Modelo lógico       | `docs/modelos.drawio` (página Lógico)     |
+| Modelo físico       | `bd/01_ddl.sql`                           |
+| Dicionário de dados | `docs/dicionario_de_dados.xlsx`           |
 
 ## Recursos do banco de dados
 
-| Recurso                | Script                 |
-|------------------------|------------------------|
-| Usuário administrador  | `bd/00_admin.sql`      |
-| Tabelas e restrições   | `bd/01_ddl.sql`        |
-| Functions              | `bd/02_functions.sql`  |
-| Triggers               | `bd/03_triggers.sql`   |
-| Procedures e TCL       | `bd/04_procedures.sql` |
-| Views                  | `bd/05_views.sql`      |
-| Índices                | `bd/06_indices.sql`    |
-| Controle de acesso     | `bd/07_acesso.sql`     |
-| Dados de teste         | `bd/08_dados_teste.sql`|
+| Recurso                | Script                  |
+|------------------------|-------------------------|
+| Usuário administrador  | `bd/00_admin.sql`       |
+| Tabelas e restrições   | `bd/01_ddl.sql`         |
+| Functions              | `bd/02_functions.sql`   |
+| Triggers               | `bd/03_triggers.sql`    |
+| Procedures e TCL       | `bd/04_procedures.sql`  |
+| Views                  | `bd/05_views.sql`       |
+| Índices                | `bd/06_indices.sql`     |
+| Controle de acesso     | `bd/07_acesso.sql`      |
+| Dados de teste         | `bd/08_dados_teste.sql` |
 
 ## Como executar
 
-### Banco de dados
+### 1. Banco de dados
 
-Siga as instruções em ['bd/README.md`](bd/README.md).
+Siga as instruções em [`bd/README.md`](bd/README.md). O uso do banco pela aplicação está descrito em [`bd/INTEGRACAO.md`](bd/INTEGRACAO.md).
 
-## Documentação
+### 2. Backend
 
-- Artigo: [preencher]
-- Apresentação: [preencher]
+Requer Node.js 20.6 ou superior.
+
+```
+cd app/backend
+npm install
+cp .env.example .env
+npm start
+```
+
+No `.env`, preencha `DB_PASSWORD` com a senha do usuário `app_videoteca` e `AUTH_SECRET` com um texto aleatório de pelo menos 32 caracteres. A API abre em `http://localhost:3001`. Detalhes em [`app/backend/README.md`](app/backend/README.md).
+
+### 3. Frontend
+
+Em outro terminal:
+
+```
+cd app/frontend
+python -m http.server 5173
+```
+
+Abra `http://localhost:5173`. Detalhes em [`app/frontend/README.md`](app/frontend/README.md).
+
+### Contas de teste
+
+Todas com a senha `123456`:
+
+| E-mail                    | Grupo     | Situação                    |
+|---------------------------|-----------|-----------------------------|
+| `admin@videoteca.com`     | ADMIN     | Ativo                       |
+| `atendente@videoteca.com` | ATENDENTE | Ativo                       |
+| `socio1@videoteca.com`    | SOCIO     | Ativo                       |
+| `limite@videoteca.com`    | SOCIO     | Já possui 3 fitas em aberto |
+| `inativo@videoteca.com`   | SOCIO     | Inativo                     |
+
+Para testar a interface sem MySQL, use `npm run dev:demo` no lugar de `npm start`. Nesse modo os dados são simulados em memória.

@@ -28,7 +28,7 @@ async function api(metodo, caminho, corpo) {
   try {
     r = await fetch(API_BASE + caminho, { method: metodo, headers: cab, body: corpo ? JSON.stringify(corpo) : undefined });
   } catch (_) {
-    throw new ErroApi(0, "SEM_CONEXAO", "Não foi possível falar com o servidor. Verifique se a API está em execução.");
+    throw new ErroApi(0, "SEM_CONEXAO", "Não foi possível falar com o servidor. Verifique se a API está em execução e se esta página foi aberta em http://localhost:5173.");
   }
   const dados = await r.json().catch(() => ({}));
   if (!r.ok) {
