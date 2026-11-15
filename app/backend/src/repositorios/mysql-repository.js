@@ -139,7 +139,8 @@ async function criarRepositorio() {
   async function registrarEmprestimo({ idUsuario, idFilme }) {
     // A procedure valida estoque, limite de 3 fitas e transação, e devolve o código EMP.
     const [resultado] = await pool.execute('CALL sp_emprestar(?, ?)', [idUsuario, idFilme]);
-    const linha = Array.isArray(resultado) ? resultado[0] : null;
+    const linhas = Array.isArray(resultado) ? resultado[0] : null;
+    const linha = Array.isArray(linhas) ? linhas[0] : null;
     return { idEmprestimo: linha?.id_emprestimo ?? null };
   }
 
