@@ -707,7 +707,7 @@
         <mxCell id="l124" parent="1" style="text;html=1;align=left;verticalAlign=middle;fillColor=none;strokeColor=none;fontFamily=Arial;fontColor=#000000;fontSize=14;" value="&lt;b&gt;Videoteca VHS&lt;/b&gt; — Modelo Lógico (MySQL 8)" vertex="1">
           <mxGeometry height="30" width="600" x="40" y="20" as="geometry" />
         </mxCell>
-        <mxCell id="l125" parent="1" style="rounded=0;html=1;fillColor=#FFFFFF;strokeColor=#000000;dashed=1;fontFamily=Arial;fontColor=#000000;fontSize=11;align=left;verticalAlign=middle;spacingLeft=12;" value="&lt;b&gt;PK&lt;/b&gt; chave primária (sublinhada) &amp;nbsp;&amp;nbsp; &lt;b&gt;FK&lt;/b&gt; chave estrangeira &amp;nbsp;&amp;nbsp; &lt;b&gt;UQ&lt;/b&gt; valor único &amp;nbsp;&amp;nbsp; &lt;b&gt;NULL&lt;/b&gt; coluna opcional; as demais são NOT NULL&lt;br&gt;IDs de usuarios e emprestimos gerados por função (USR-00001, EMP-2026-00001); AUTO_INCREMENT apenas nas tabelas de apoio." vertex="1">
+        <mxCell id="l125" parent="1" style="rounded=0;html=1;fillColor=#FFFFFF;strokeColor=#000000;dashed=1;fontFamily=Arial;fontColor=#000000;fontSize=11;align=left;verticalAlign=middle;spacingLeft=12;" value="&lt;b&gt;PK&lt;/b&gt; chave primária (sublinhada) &amp;nbsp;&amp;nbsp; &lt;b&gt;FK&lt;/b&gt; chave estrangeira &amp;nbsp;&amp;nbsp; &lt;b&gt;UQ&lt;/b&gt; valor único &amp;nbsp;&amp;nbsp; &lt;b&gt;NULL&lt;/b&gt; coluna opcional; as demais são NOT NULL&lt;br&gt;IDs de usuarios e emprestimos gerados por função (USR-00001, EMP-2026-00001); AUTO_INCREMENT apenas nas chaves técnicas (grupos_usuarios, generos e filmes)." vertex="1">
           <mxGeometry height="46" width="1130" x="60" y="540" as="geometry" />
         </mxCell>
       </root>

@@ -51,7 +51,7 @@ Pontos importantes:
 | Constante   | Função |
 |-------------|--------|
 | `API_BASE`  | Endereço da API |
-| `MODO_DEMO` | `true` mostra os botões de login rápido com as contas de teste, úteis na apresentação. `false` esconde os botões. |
+| `MODO_DEMO` | `false` (valor da entrega) esconde os botões. `true` mostra os botões de login rápido com as contas de teste; use só na apresentação local. |
 
 ## 3. Telas por perfil
 

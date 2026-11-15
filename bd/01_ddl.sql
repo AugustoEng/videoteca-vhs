@@ -2,6 +2,8 @@ DROP DATABASE IF EXISTS videoteca;
 CREATE DATABASE videoteca CHARACTER SET utf8mb4;
 USE videoteca;
 
+-- AUTO_INCREMENT justificado: tabela de apoio com poucos perfis fixos (ADMIN, ATENDENTE, SOCIO).
+-- O id_grupo não aparece para o usuário nem carrega regra de negócio.
 CREATE TABLE grupos_usuarios (
   id_grupo  INT          NOT NULL AUTO_INCREMENT,
   nome      VARCHAR(30)  NOT NULL,
@@ -9,6 +11,8 @@ CREATE TABLE grupos_usuarios (
   PRIMARY KEY (id_grupo)
 ) ENGINE=InnoDB;
 
+-- AUTO_INCREMENT justificado: tabela de apoio, lista pequena e estável de gêneros.
+-- O id_genero não aparece para o usuário nem carrega regra de negócio.
 CREATE TABLE generos (
   id_genero INT         NOT NULL AUTO_INCREMENT,
   nome      VARCHAR(50) NOT NULL,
@@ -28,6 +32,10 @@ CREATE TABLE usuarios (
     REFERENCES grupos_usuarios (id_grupo) ON DELETE RESTRICT ON UPDATE RESTRICT
 ) ENGINE=InnoDB;
 
+-- AUTO_INCREMENT justificado: id_filme é só chave técnica. O identificador que o usuário vê
+-- é codigo_catalogo (UNIQUE). Usuários e empréstimos, cujos códigos são citados no
+-- atendimento, usam functions próprias (02_functions.sql).
+-- ck_filmes_ano começa em 1901 porque o tipo YEAR do MySQL só aceita anos de 1901 a 2155.
 CREATE TABLE filmes (
   id_filme        INT          NOT NULL AUTO_INCREMENT,
   codigo_catalogo VARCHAR(20)  NOT NULL,
@@ -42,7 +50,7 @@ CREATE TABLE filmes (
   CONSTRAINT fk_filmes_genero FOREIGN KEY (id_genero)
     REFERENCES generos (id_genero) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT ck_filmes_estoque CHECK (qtd_disponivel BETWEEN 0 AND qtd_total),
-  CONSTRAINT ck_filmes_ano CHECK (ano_lancamento BETWEEN 1888 AND 2100)
+  CONSTRAINT ck_filmes_ano CHECK (ano_lancamento BETWEEN 1901 AND 2100)
 ) ENGINE=InnoDB;
 
 CREATE TABLE emprestimos (

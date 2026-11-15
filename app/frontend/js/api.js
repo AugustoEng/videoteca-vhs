@@ -3,9 +3,9 @@
    API_BASE: endereço da API do Erick (npm run dev:demo → porta 3001).
    O front deve ser servido em http://localhost:5173, que é o CORS_ORIGIN do .env:
    cd frontend && npx serve -l 5173    (ou: python -m http.server 5173)
-   MODO_DEMO: mostra botões de login rápido. Colocar false na entrega final. */
+   MODO_DEMO: true mostra botões de login rápido com as contas de teste; usar só na apresentação local. */
 const API_BASE = "http://localhost:3001";
-const MODO_DEMO = true;
+const MODO_DEMO = false;
 
 class ErroApi extends Error {
   constructor(status, codigo, mensagem) { super(mensagem); this.status = status; this.codigo = codigo; }
